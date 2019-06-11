@@ -1,0 +1,34 @@
+@charset "UTF-8";
+.stickyMenu.stickyMenu-fixed {
+    position: fixed;
+    z-index: 5000001;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.stickyMenu.stickyMenu-clone {
+    display: none;
+    visibility: hidden;
+}
+    .stickyMenu.stickyMenu-fixed + .stickyMenu-clone {
+        display: block;
+    }
+
+.stickyMenu-fadeMode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    z-index: 5000001;
+}
+.stickyMenu-fadeMode.stickyMenu-fixed {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+.stickyMenu-fadeMode.stickyMenu-animation {
+    transition: -webkit-transform 0.2s ease-out;
+    transition: transform 0.2s ease-out;
+    transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
+}

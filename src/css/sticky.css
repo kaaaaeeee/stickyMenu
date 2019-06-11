@@ -1,0 +1,44 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+}
+
+.dummy-list p {
+    margin: 0;
+    padding: 0;
+}
+
+.dummy-list p {
+    border-bottom: 1px solid #ccc;
+    padding: 0 15px;
+    line-height: 50px;
+}
+
+.dummy-on,
+.dummy-off {
+    background: #f0f0f0;
+}
+
+.stickyMenu div {
+    width: 50%;
+    padding: 0 5px;
+    line-height: 60px;
+    background: rgba(255, 170, 238, 0.7);
+    box-sizing: border-box;
+}
+
+.demo-fade1 {
+    text-align: right;
+}
+
+.demo-fade1 div {
+    display: inline-block;
+    background: rgba(170, 204, 187, 0.7);
+    text-align-last: left;
+}
+
+.demo-fade2 div {
+    display: inline-block;
+    background: rgba(238, 204, 17, 0.7);
+    text-align-last: left;
+}
