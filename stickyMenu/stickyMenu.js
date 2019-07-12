@@ -1,4 +1,8 @@
 (function () {
+    /***
+     * - 下付き
+     * - 上下スクロール
+     */
     var namespace = 'stickyMenu';
     var $window = $(window);
     var scrollTop = 0;
@@ -15,7 +19,8 @@
             id: null,
             position: {
                 on: null,
-                off: null
+                off: null,
+                prepare: null
             },
             stickyHeight: $self.outerHeight(),
             $clone: null,
@@ -23,7 +28,9 @@
             defaultClass: '',
             fixedClass: 'stickyMenu-fixed',
             cloneClass: 'stickyMenu-clone',
-            animationClass: 'stickyMenu-animation'
+            prepareClass: 'stickyMenu-prepare',
+            animationClass: 'stickyMenu-animation',
+            isPrepare: false
         };
 
         self.options = $.extend(true, self.defaults, method, self.initials);
@@ -76,7 +83,8 @@
         var options = self.options;
 
         if (!options.fadeMode) {
-            options.position.on = $sticky.offset().top;
+            options.position.prepare = (options.$on === null) ? null : $sticky.offset().top + $sticky.outerHeight();
+            options.position.on = (options.$on === null || options.$on.length !== 1) ? $sticky.offset().top : options.$on.offset().top;
         } else {
             options.position.on = (options.$on === null || options.$on.length !== 1) ? null : options.$on.offset().top;
         }
@@ -88,38 +96,90 @@
         var self = this;
         var $sticky = self.$sticky;
         var options = self.options;
+        var delay = null;
 
         scrollTop = $window.scrollTop();
+
+        if (options.position.prepare !== null) {
+            self.prepareCheck();
+        }
+        
+        if (stickyArea(options.position)) {
+            self.showMenu();
+        } else {
+            self.hideMenu();
+        }
+    };
+    
+    sticky.prototype.prepareCheck = function () {
+        var self = this;
+        var $sticky = self.$sticky;
+        var options = self.options;
+        if (scrollTop >= options.position.prepare) {
+            if (options.isPrepare) {
+                return;
+            }
+            $sticky.toggleClass(options.prepareClass, true);
+            delay = setInterval(function () {
+                console.log('delay');
+                if ($sticky.hasClass(options.prepareClass)) {
+                    clearInterval(delay);
+                    $sticky.toggleClass(options.animationClass, true);
+                }
+            }, 10);
+            options.isPrepare = true;
+        } else {
+            if (!options.isPrepare) {
+                return;
+            }
+            $sticky
+                .toggleClass(options.animationClass, false)
+                .toggleClass(options.prepareClass, false);
+
+            options.isPrepare = false;
+        }
+    };
+    
+    sticky.prototype.showMenu = function () {
+        var self = this;
+        var $sticky = self.$sticky;
+        var options = self.options;
         // default
         if (!options.fadeMode) {
-            if (stickyArea(options.position)) {
-                $sticky.toggleClass(options.fixedClass, true);
-                if (scrollTop > options.position.off - options.stickyHeight && scrollTop < options.position.off) {
-                    $sticky.css('top', (scrollTop - (options.position.off - options.stickyHeight)) * -1);
-                } else {
-                    $sticky.css('top', '');
-                }
+            $sticky.toggleClass(options.fixedClass, true);
+            if (scrollTop > options.position.off - options.stickyHeight && scrollTop < options.position.off) {
+                $sticky.css('top', (scrollTop - (options.position.off - options.stickyHeight)) * -1);
             } else {
-                $sticky.toggleClass(options.fixedClass, false);
+                $sticky.css('top', '');
             }
         }
         // fadeMode
         else {
-            if (stickyArea(options.position)) {
-                $sticky
-                    .css({
-                        '-webkit-transform': '',
-                        'transform': ''
-                    })
-                    .toggleClass(options.fixedClass, true);
-            } else {
-                $sticky
-                    .toggleClass(options.fixedClass, false)
-                    .css({
-                        '-webkit-transform': 'translateY(' + options.stickyHeight * -1 + 'px)',
-                        'transform': 'translateY(' + options.stickyHeight * -1 + 'px)',
-                    });
-            }
+            $sticky
+                .css({
+                    '-webkit-transform': '',
+                    'transform': ''
+                })
+                .toggleClass(options.fixedClass, true);
+        }
+    };
+    
+    sticky.prototype.hideMenu = function () {
+        var self = this;
+        var $sticky = self.$sticky;
+        var options = self.options;
+        // default
+        if (!options.fadeMode) {
+            $sticky.toggleClass(options.fixedClass, false);
+        }
+        // fadeMode
+        else {
+            $sticky
+                .toggleClass(options.fixedClass, false)
+                .css({
+                    '-webkit-transform': 'translateY(' + options.stickyHeight * -1 + 'px)',
+                    'transform': 'translateY(' + options.stickyHeight * -1 + 'px)',
+                });
         }
     };
 

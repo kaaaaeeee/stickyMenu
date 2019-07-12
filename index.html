@@ -16,7 +16,7 @@
         <p>001</p>
         <p>002</p>
         <p>003</p>
-        <div class="demo-fade2 stickyMenu"><div>sticky(fade)</div></div>
+        <div class="demo-fade2 stickyMenu"><div>sticky(fade on off)</div></div>
         <p>004</p>
         <p>005</p>
         <p>006</p>
@@ -24,7 +24,8 @@
         <p>008</p>
         <p>009</p>
         <div class="stickyMenu"><div>sticky(default)</div></div>
-        <p class="dummy-on">010 on</p>
+        <div class="demo-def2 stickyMenu"><div>sticky(default on off)</div></div>
+        <p>010</p>
         <p>011</p>
         <p>012</p>
         <p>013</p>
@@ -34,7 +35,7 @@
         <p>017</p>
         <p>018</p>
         <p>019</p>
-        <p>020</p>
+        <p class="dummy-on">020 on</p>
         <p>021</p>
         <p>022</p>
         <p>023</p>
@@ -54,7 +55,7 @@
         <p>037</p>
         <p>038</p>
         <p>039</p>
-        <p class="dummy-off">040 off</p>
+        <p>040</p>
         <p>041</p>
         <p>042</p>
         <p>043</p>
@@ -64,7 +65,7 @@
         <p>047</p>
         <p>048</p>
         <p>049</p>
-        <p>050</p>
+        <p class="dummy-off">050 off</p>
         <p>051</p>
         <p>052</p>
         <p>053</p>
@@ -75,6 +76,16 @@
         <p>058</p>
         <p>059</p>
         <p>060</p>
+        <p>061</p>
+        <p>062</p>
+        <p>063</p>
+        <p>064</p>
+        <p>066</p>
+        <p>066</p>
+        <p>067</p>
+        <p>068</p>
+        <p>069</p>
+        <p>070</p>
     </div>
 
     <div id="hoge"></div>
@@ -92,7 +103,8 @@
         if ($(this).hasClass('demo-fade1')) {
             console.log($(this));
             $(this).stickyMenu({
-                fadeMode: true
+                fadeMode: true,
+                createClone: false
             });
         } else if ($(this).hasClass('demo-fade2')) {
             $(this).stickyMenu({
@@ -100,12 +112,14 @@
                 $off: $('.dummy-off'),
                 fadeMode: true
             });
-        } else {
+        } else if ($(this).hasClass('demo-def2')) {
             $(this).stickyMenu({
                 $on: $('.dummy-on'),
                 $off: $('.dummy-off'),
                 fadeMode: false
             });
+        } else {
+            $(this).stickyMenu();
         }
     });
 })();

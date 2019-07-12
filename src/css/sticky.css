@@ -27,18 +27,29 @@ body {
     box-sizing: border-box;
 }
 
-.demo-fade1 {
+.demo-fade1,
+.demo-fade2 {
     text-align: right;
 }
-
-.demo-fade1 div {
+.demo-fade2.stickyMenu-fixed,
+.demo-def2.stickyMenu-fixed {
+    padding-top: 60px;
+}
+.demo-fade1 div,
+.demo-fade2 div {
     display: inline-block;
     background: rgba(170, 204, 187, 0.7);
-    text-align-last: left;
 }
 
 .demo-fade2 div {
-    display: inline-block;
     background: rgba(238, 204, 17, 0.7);
+}
+
+.demo-def2 div {
+    display: inline-block;
+    background: rgba(170, 187, 204, 0.7);
+}
+.demo-fade2 div,
+.demo-def2 div {
     text-align-last: left;
 }
