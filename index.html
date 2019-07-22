@@ -16,15 +16,16 @@
         <p>001</p>
         <p>002</p>
         <p>003</p>
-        <div class="demo-fade2 stickyMenu"><div>sticky(fade on off)</div></div>
+        <div class="demo-fade2 stickyMenu"><div><span>sticky(fade on off)</span></div></div>
+        <div class="demo-fade4 stickyMenu"><div><span>sticky(fade bottom on off)</span></div></div>
         <p>004</p>
         <p>005</p>
         <p>006</p>
         <p>007</p>
         <p>008</p>
         <p>009</p>
-        <div class="stickyMenu"><div>sticky(default)</div></div>
-        <div class="demo-def2 stickyMenu"><div>sticky(default on off)</div></div>
+        <div class="stickyMenu"><div><span>sticky(default)</span></div></div>
+        <div class="demo-def2 stickyMenu"><div><span>sticky(default on off)</span></div></div>
         <p>010</p>
         <p>011</p>
         <p>012</p>
@@ -33,6 +34,7 @@
         <p>015</p>
         <p>016</p>
         <p>017</p>
+        <div class="demo-def3 stickyMenu"><div><span>sticky(default bottom)</span></div></div>
         <p>018</p>
         <p>019</p>
         <p class="dummy-on">020 on</p>
@@ -87,7 +89,7 @@
         <p>069</p>
         <p>070</p>
     </div>
-
+    <div class="demo-fade3 stickyMenu"><div><span>sticky(fade bottom)</span></div></div>
     <div id="hoge"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="stickyMenu/stickyMenu.js"></script>
@@ -95,7 +97,7 @@
 (function () {
     $('#hoge').after((function () {/***
     (( fade用 ))
-    <div class="demo-fade1 stickyMenu"><div>sticky(fade)</div></div> ***/}).toString().replace(/\r?\n/g, '').replace(/\(\(.*?\)\)/g, '').split('***')[1]);
+    <div class="demo-fade1 stickyMenu"><div><span>sticky(fade)</span></div></div> ***/}).toString().replace(/\r?\n/g, '').replace(/\(\(.*?\)\)/g, '').split('***')[1]);
 })();
 
 (function () {
@@ -112,11 +114,27 @@
                 $off: $('.dummy-off'),
                 fadeMode: true
             });
+        } else if ($(this).hasClass('demo-fade3')) {
+            $(this).stickyMenu({
+                direction: 'bottom',
+                fadeMode: true
+            });
+        } else if ($(this).hasClass('demo-fade4')) {
+            $(this).stickyMenu({
+                $on: $('.dummy-on'),
+                $off: $('.dummy-off'),
+                direction: 'bottom',
+                fadeMode: true
+            });
         } else if ($(this).hasClass('demo-def2')) {
             $(this).stickyMenu({
                 $on: $('.dummy-on'),
                 $off: $('.dummy-off'),
                 fadeMode: false
+            });
+        } else if ($(this).hasClass('demo-def3')) {
+            $(this).stickyMenu({
+                direction: 'bottom'
             });
         } else {
             $(this).stickyMenu();

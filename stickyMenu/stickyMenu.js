@@ -14,6 +14,7 @@
             $on: null,
             $off: null,
             fadeMode: false,
+            direction: 'top',
         };
         self.initials = {
             id: null,
@@ -29,6 +30,7 @@
             fixedClass: 'stickyMenu-fixed',
             cloneClass: 'stickyMenu-clone',
             prepareClass: 'stickyMenu-prepare',
+            directuinClass: 'stickyMenu-bottom',
             animationClass: 'stickyMenu-animation',
             isPrepare: false
         };
@@ -39,6 +41,10 @@
         // add class
         self.options.defaultClass = (self.options.fadeMode) ? 'stickyMenu-fadeMode' : 'stickyMenu-default';
         self.$sticky.toggleClass(self.options.defaultClass, true);
+        console.log(self.options.direction);
+        if (self.options.direction === 'bottom') {
+            self.$sticky.toggleClass(self.options.directuinClass, true);
+        }
         // create id
         if (self.options.id === null) {
             self.options.id = namespace + '-' + $('.stickyMenu').index($self[0]);
@@ -81,14 +87,24 @@
         var self = this;
         var $sticky = self.$sticky;
         var options = self.options;
-
-        if (!options.fadeMode) {
-            options.position.prepare = (options.$on === null) ? null : $sticky.offset().top + $sticky.outerHeight();
-            options.position.on = (options.$on === null || options.$on.length !== 1) ? $sticky.offset().top : options.$on.offset().top;
+        
+        if (options.direction === 'top') {
+            if (!options.fadeMode) {
+                options.position.prepare = (options.$on === null) ? null : $sticky.offset().top + $sticky.outerHeight();
+                options.position.on = (options.$on === null || options.$on.length !== 1) ? $sticky.offset().top : options.$on.offset().top;
+            } else {
+                options.position.on = (options.$on === null || options.$on.length !== 1) ? null : options.$on.offset().top;
+            }
+            options.position.off = (options.$off === null || options.$off.length !== 1) ? null :  options.$off.offset().top + options.$off.outerHeight();
         } else {
-            options.position.on = (options.$on === null || options.$on.length !== 1) ? null : options.$on.offset().top;
+            if (!options.fadeMode) {
+                options.position.prepare = (options.$on === null) ? null : $sticky.offset().top - window.outerHeight;
+                options.position.on = (options.$on === null || options.$on.length !== 1) ? $sticky.offset().top + $sticky.outerHeight() - window.outerHeight : options.$on.offset().top - window.outerHeight;
+            } else {
+                options.position.on = (options.$on === null || options.$on.length !== 1) ? null : options.$on.offset().top;
+            }
+            // options.position.off = (options.$off === null || options.$off.length !== 1) ? null :  options.$off.offset().top + options.$off.outerHeight();
         }
-        options.position.off = (options.$off === null || options.$off.length !== 1) ? null :  options.$off.offset().top + options.$off.outerHeight();
         options.stickyHeight = $sticky.outerHeight();
     };
 
@@ -174,11 +190,12 @@
         }
         // fadeMode
         else {
+            var translateNum = (options.direction === 'top') ? options.stickyHeight * -1 : options.stickyHeight;
             $sticky
                 .toggleClass(options.fixedClass, false)
                 .css({
-                    '-webkit-transform': 'translateY(' + options.stickyHeight * -1 + 'px)',
-                    'transform': 'translateY(' + options.stickyHeight * -1 + 'px)',
+                    '-webkit-transform': 'translateY(' + translateNum + 'px)',
+                    'transform': 'translateY(' + translateNum + 'px)',
                 });
         }
     };

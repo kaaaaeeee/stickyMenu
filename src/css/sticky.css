@@ -26,9 +26,15 @@ body {
     background: rgba(255, 170, 238, 0.7);
     box-sizing: border-box;
 }
-
+.stickyMenu span {
+    display: inline-block;
+    line-height: 1.4;
+    vertical-align: middle;
+}
 .demo-fade1,
-.demo-fade2 {
+.demo-fade2,
+.demo-fade3,
+.demo-fade4 {
     text-align: right;
 }
 .demo-fade2.stickyMenu-fixed,
@@ -36,7 +42,9 @@ body {
     padding-top: 60px;
 }
 .demo-fade1 div,
-.demo-fade2 div {
+.demo-fade2 div,
+.demo-fade3 div,
+.demo-fade4 div {
     display: inline-block;
     background: rgba(170, 204, 187, 0.7);
 }
@@ -45,11 +53,13 @@ body {
     background: rgba(238, 204, 17, 0.7);
 }
 
-.demo-def2 div {
-    display: inline-block;
-    background: rgba(170, 187, 204, 0.7);
-}
 .demo-fade2 div,
 .demo-def2 div {
     text-align-last: left;
 }
+
+.demo-def2 div {
+    display: inline-block;
+    background: rgba(170, 187, 204, 0.7);
+}
+

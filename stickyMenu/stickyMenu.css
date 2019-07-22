@@ -46,3 +46,18 @@
     transition: transform 0.2s ease-out;
     transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
 }
+
+.stickyMenu-bottom.stickyMenu-fixed {
+    top: auto;
+    bottom: 0;
+}
+.stickyMenu-fadeMode.stickyMenu-bottom {
+    top: auto;
+    bottom: 0;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+}
+.stickyMenu-fadeMode.stickyMenu-bottom.stickyMenu-fixed {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
