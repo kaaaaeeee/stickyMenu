@@ -41,6 +41,14 @@ body {
 .demo-def2.stickyMenu-fixed {
     padding-top: 60px;
 }
+/* ずれるので */
+.demo-fade2,
+.demo-fade4 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
 .demo-fade1 div,
 .demo-fade2 div,
 .demo-fade3 div,
@@ -49,7 +57,8 @@ body {
     background: rgba(170, 204, 187, 0.7);
 }
 
-.demo-fade2 div {
+.demo-fade2 div,
+.demo-fade4 div {
     background: rgba(238, 204, 17, 0.7);
 }
 
@@ -58,8 +67,13 @@ body {
     text-align-last: left;
 }
 
-.demo-def2 div {
+.demo-def2 div,
+.demo-def4 div {
     display: inline-block;
     background: rgba(170, 187, 204, 0.7);
 }
 
+.demo-fade4.stickyMenu-fixed,
+.demo-def4.stickyMenu-fixed {
+    padding-bottom: 60px;
+}

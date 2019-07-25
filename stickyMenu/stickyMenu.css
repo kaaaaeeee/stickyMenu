@@ -1,20 +1,20 @@
 @charset "UTF-8";
-.stickyMenu.stickyMenu-fixed {
+.stickyMenu-fixed {
     position: fixed;
     z-index: 5000001;
     top: 0;
     left: 0;
     width: 100%;
 }
-.stickyMenu.stickyMenu-clone {
+.stickyMenu-clone {
     display: none;
     visibility: hidden;
 }
-.stickyMenu.stickyMenu-prepare + .stickyMenu-clone,
-.stickyMenu.stickyMenu-fixed + .stickyMenu-clone {
+.stickyMenu-prepare + .stickyMenu-clone,
+.stickyMenu-fixed + .stickyMenu-clone {
     display: block;
 }
-.stickyMenu.stickyMenu-prepare {
+.stickyMenu-prepare {
     position: fixed;
     z-index: 5000001;
     top: 0;
@@ -23,7 +23,13 @@
     -webkit-transform: translateY(-100%);
     transform: translateY(-100%);
 }
-.stickyMenu.stickyMenu-prepare.stickyMenu-fixed {
+.stickyMenu-bottom.stickyMenu-prepare {
+    top: auto;
+    bottom: 0;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+}
+.stickyMenu-prepare.stickyMenu-fixed {
     -webkit-transform: translateY(0);
     transform: translateY(0);
 }
@@ -41,7 +47,7 @@
     -webkit-transform: translateY(0);
     transform: translateY(0);
 }
-.stickyMenu.stickyMenu-animation {
+.stickyMenu-animation {
     transition: -webkit-transform 0.2s ease-out;
     transition: transform 0.2s ease-out;
     transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out;
@@ -60,4 +66,15 @@
 .stickyMenu-fadeMode.stickyMenu-bottom.stickyMenu-fixed {
     -webkit-transform: translateY(0);
     transform: translateY(0);
+}
+
+.stickyMenu-animation.stickyMenu-fadeIn {
+  transition: -webkit-transform 0.2s ease-out, -webkit-opacity 0.3s ease-out 0.2s;
+  transition: transform 0.2s ease-out, opacity 0.3s ease-out 0.2s;
+  transition: transform 0.2s ease-out, -webkit-transform 0.2s ease-out, opacity 0.3s ease-out 0.2s, -webkit-opacity 0.3s ease-out 0.2s;
+  opacity: 0;
+}
+
+.stickyMenu-animation.stickyMenu-fadeIn.stickyMenu-fixed {
+  opacity: 1;
 }

@@ -17,7 +17,8 @@
         <p>002</p>
         <p>003</p>
         <div class="demo-fade2 stickyMenu"><div><span>sticky(fade on off)</span></div></div>
-        <div class="demo-fade4 stickyMenu"><div><span>sticky(fade bottom on off)</span></div></div>
+        <div class="demo-fade4 stickyMenu"><div><span>sticky(fade bottom on off fadein)</span></div></div>
+        <div class="demo-def4 stickyMenu"><div><span>sticky(default bottom on off)</span></div></div>
         <p>004</p>
         <p>005</p>
         <p>006</p>
@@ -106,7 +107,7 @@
             console.log($(this));
             $(this).stickyMenu({
                 fadeMode: true,
-                createClone: false
+                createClone: true
             });
         } else if ($(this).hasClass('demo-fade2')) {
             $(this).stickyMenu({
@@ -124,7 +125,8 @@
                 $on: $('.dummy-on'),
                 $off: $('.dummy-off'),
                 direction: 'bottom',
-                fadeMode: true
+                fadeMode: true,
+                fadeInAnimation: true
             });
         } else if ($(this).hasClass('demo-def2')) {
             $(this).stickyMenu({
@@ -135,6 +137,12 @@
         } else if ($(this).hasClass('demo-def3')) {
             $(this).stickyMenu({
                 direction: 'bottom'
+            });
+        } else if ($(this).hasClass('demo-def4')) {
+            $(this).stickyMenu({
+                $on: $('.dummy-on'),
+                $off: $('.dummy-off'),
+                direction: 'bottom',
             });
         } else {
             $(this).stickyMenu();
